@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+class UPawnSensingComponent;
+class UFloatingPawnMovement;
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "EnemyBasicMovementComponent.generated.h"
@@ -15,6 +16,10 @@ class SPOREREBUILD_API UEnemyBasicMovementComponent : public UActorComponent
 private:
 	FVector m_movementDirection;
 	FTimerHandle m_timerHandle;
+	UPawnSensingComponent* m_pawnSensingComp;
+	UFloatingPawnMovement* m_floatingPawnMovementComp;
+	AActor* m_owner;
+
 public:	
 	// Sets default values for this component's properties
 	UEnemyBasicMovementComponent();
