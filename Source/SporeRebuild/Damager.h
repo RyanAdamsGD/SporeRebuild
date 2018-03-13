@@ -4,33 +4,29 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Attackable.generated.h"
+#include "Damager.generated.h"
 
 
-UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class SPOREREBUILD_API UAttackable : public UActorComponent
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class SPOREREBUILD_API UDamager : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:
+public:	
 	// Sets default values for this component's properties
-	UAttackable();
+	UDamager();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:
+public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void DealDamage(float AmountOfDamage);
-	void HealDamage(float AmountToHeal);
+	UFUNCTION()
+		void BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
-	int MaxHealth;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
-	int CurrentHealth;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Damage)
+	int Damage;
 };

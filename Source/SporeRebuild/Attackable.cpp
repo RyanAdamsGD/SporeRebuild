@@ -19,7 +19,7 @@ void UAttackable::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	CurrentHealth = MaxHealth;
 }
 
 
@@ -31,7 +31,15 @@ void UAttackable::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	// ...
 }
 
-void UAttackable::BeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
+void UAttackable::DealDamage(float AmountOfDamage)
 {
+	CurrentHealth -= AmountOfDamage;
+	CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
+}
+
+void UAttackable::HealDamage(float AmountToHeal)
+{
+	CurrentHealth += AmountToHeal;
+	CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
 }
 
